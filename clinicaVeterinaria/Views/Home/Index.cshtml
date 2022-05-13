@@ -1,0 +1,49 @@
+﻿@model clinicaVeterinaria.Models.LoginModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@ViewBag.confCadastro
+
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <fieldset>
+        <br />
+        <h2>Entrar</h2>
+        <br />
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i style="font-size:20px;" class="fas fa-envelope"></i></span>
+
+                @Html.EditorFor(x => x.Usuario, new
+           {
+               htmlAttributes = new { id = "txtUsuario", senha = "txtUsuario", type = "text", @class = "form-control", placeholder = "Digite o usuario", required = "required", maxlength = "30" }
+           })
+
+                @Html.ValidationMessageFor(x => x.Usuario, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i style="font-size:20px;" class="fas fa-lock"></i></span>
+
+                @Html.EditorFor(x => x.Senha, new
+           {
+               htmlAttributes = new { id = "txtSenha", senha = "txtSenha", type = "password", @class = "form-control", placeholder = "Digite sua senha", required = "required", maxlength = "10" }
+           })
+
+                @Html.ValidationMessageFor(x => x.Senha, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+        <input type="submit" class="button button-a button-big button-rouded" value="ENTRAR"><br />
+        <br />
+
+    </fieldset>
+}
+
+@ViewBag.msgLogar
