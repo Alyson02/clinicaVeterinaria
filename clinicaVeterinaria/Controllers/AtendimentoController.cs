@@ -20,7 +20,7 @@ namespace clinicaVeterinaria.Controllers
         {
             List<SelectListItem> ag = new List<SelectListItem>();
 
-            using (MySqlConnection con = new MySqlConnection("Server=localhost;DataBase=db_veterinaria;User=root;pwd=12345678"))
+            using (MySqlConnection con = new MySqlConnection("Server=localhost;DataBase=db_veterinaria;User=root;pwd=root"))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("select * from veterinario;", con);
@@ -46,7 +46,7 @@ namespace clinicaVeterinaria.Controllers
         {
             List<SelectListItem> ag = new List<SelectListItem>();
 
-            using (MySqlConnection con = new MySqlConnection("Server=localhost;DataBase=db_veterinaria;User=root;pwd=12345678"))
+            using (MySqlConnection con = new MySqlConnection("Server=localhost;DataBase=db_veterinaria;User=root;pwd=root"))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("select * from animal;", con);
@@ -70,6 +70,10 @@ namespace clinicaVeterinaria.Controllers
 
         public ActionResult CreateAtendimento() //Carrega a página de cadastro do Tipo
         {
+            if (string.IsNullOrEmpty(Session["usu"]?.ToString()) || Session["tipo"]?.ToString() != "1")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             CarregaAnimais();
             CarregaVeterinarios();
             return View();
@@ -93,13 +97,17 @@ namespace clinicaVeterinaria.Controllers
                 atendimento.IdVeterinario = int.Parse(Request["veterinario"]);
 
                 atendimentoAcoes.inserirAtendimento(atendimento);
-                ViewBag.msgCad = "Cadastro Efetuado";
+                Response.Write("<script>alert('Cadastro realizado com sucesso')</script>");
             }
             return View();
         }
 
         public ActionResult GetAtendimentos()
         {
+            if (string.IsNullOrEmpty(Session["usu"]?.ToString()))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             GridView dgv = new GridView();
             dgv.DataSource = atendimentoAcoes.ConsultaAtendimento();
             dgv.DataBind();

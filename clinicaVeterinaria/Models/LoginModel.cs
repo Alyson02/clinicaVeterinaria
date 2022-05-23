@@ -13,5 +13,7 @@ namespace clinicaVeterinaria.Models
         public string Senha { get; set; }
         [Display(Name = "Tipo do usuário")]
         public int IdTipoUsuario { get; set; }
+
+        public string ConfirmarSenha { get; set; }
     }
 }

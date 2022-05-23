@@ -20,7 +20,7 @@ namespace clinicaVeterinaria.Controllers
         {
             List<SelectListItem> ag = new List<SelectListItem>();
 
-            using (MySqlConnection con = new MySqlConnection("Server=localhost;DataBase=db_veterinaria;User=root;pwd=12345678"))
+            using (MySqlConnection con = new MySqlConnection("Server=localhost;DataBase=db_veterinaria;User=root;pwd=root"))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("select * from tipoAnimal;", con);
@@ -46,7 +46,7 @@ namespace clinicaVeterinaria.Controllers
         {
             List<SelectListItem> ag = new List<SelectListItem>();
 
-            using (MySqlConnection con = new MySqlConnection("Server=localhost;DataBase=db_veterinaria;User=root;pwd=12345678"))
+            using (MySqlConnection con = new MySqlConnection("Server=localhost;DataBase=db_veterinaria;User=root;pwd=root"))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("select * from cliente;", con);
@@ -70,6 +70,10 @@ namespace clinicaVeterinaria.Controllers
 
         public ActionResult CreateAnimal() //Carrega a página de cadastro do Tipo
         {
+            if (string.IsNullOrEmpty(Session["usu"]?.ToString()) || Session["tipo"]?.ToString() != "1")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             CarregaClientes();
             CarregaTipoAnimais();
             return View();
@@ -85,12 +89,16 @@ namespace clinicaVeterinaria.Controllers
             animal.IdTipo =  int.Parse(Request["tipoAnimal"]);
 
             animalAcoes.inserirAnimal(animal);
-            ViewBag.msgCad = "Cadastro Efetuado";
+            Response.Write("<script>alert('Cadastro realizado com sucesso')</script>");
             return View();
         }
 
-        public ActionResult GetAnimals()
+        public ActionResult GetAnimais()
         {
+            if (string.IsNullOrEmpty(Session["usu"]?.ToString()))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             GridView dgv = new GridView();
             dgv.DataSource = animalAcoes.ConsultaAnimal();
             dgv.DataBind();

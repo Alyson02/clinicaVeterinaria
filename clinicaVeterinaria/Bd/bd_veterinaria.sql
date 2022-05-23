@@ -50,4 +50,8 @@ create table atendimento(
     foreign key (idAnimal) references veterinario(id)
 );
 
+insert into tipoUsuario values(default, 'ademir');
+
+insert into login values('mereceMb', '1', 1);
+
 

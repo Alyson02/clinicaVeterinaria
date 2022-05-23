@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -49,6 +50,16 @@ namespace clinicaVeterinaria.Dados
             cmd.Parameters.Add("@tipoUsu", MySqlDbType.VarChar).Value = login.IdTipoUsuario;
             cmd.ExecuteNonQuery();
             con.MyDesconectarBD();
+        }
+
+        public DataTable ConsultaUsuarios()//Método de consulta do tipo de usuário
+        {
+            MySqlCommand cmd = new MySqlCommand("select * from login", con.MyDesconectarBD());
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            con.MyDesconectarBD();
+            return dt;
         }
     }
 }

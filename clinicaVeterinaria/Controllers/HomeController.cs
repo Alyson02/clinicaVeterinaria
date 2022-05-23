@@ -15,7 +15,7 @@ namespace clinicaVeterinaria.Controllers
 
         public ActionResult Index()
         {
-            Session["tipo"] = "";
+            if (!string.IsNullOrEmpty(Session["usu"]?.ToString())) RedirectToAction("Menu");
             return View();
         }
 
@@ -41,7 +41,21 @@ namespace clinicaVeterinaria.Controllers
 
         public ActionResult Menu()
         {
+            if(string.IsNullOrEmpty(Session["usu"]?.ToString()))
+            {
+                return RedirectToAction("Index");
+            }
             return View();
+        }
+
+        public ActionResult Sair()
+        {
+            if (string.IsNullOrEmpty(Session["usu"]?.ToString()))
+            {
+                Session["usu"] = null;
+                Session["tipo"] = null;
+            }
+            return RedirectToAction("Index");
         }
 
     }

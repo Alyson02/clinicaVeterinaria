@@ -17,6 +17,10 @@ namespace clinicaVeterinaria.Controllers
 
         public ActionResult CreateCliente() //Carrega a página de cadastro do Tipo
         {
+            if (string.IsNullOrEmpty(Session["usu"]?.ToString()) || Session["tipo"]?.ToString() != "1")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -24,12 +28,16 @@ namespace clinicaVeterinaria.Controllers
         public ActionResult CreateCliente(ClienteModel cliente) //Efetua o cadastro
         {
             clienteAcoes.inserirCliente(cliente);
-            ViewBag.msgCad = "Cadastro Efetuado";
+            Response.Write("<script>alert('Cadastro realizado com sucesso')</script>");
             return View();
         }
 
         public ActionResult GetClientes()
         {
+            if (string.IsNullOrEmpty(Session["usu"]?.ToString()))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             GridView dgv = new GridView();
             dgv.DataSource = clienteAcoes.ConsultaCliente();
             dgv.DataBind();

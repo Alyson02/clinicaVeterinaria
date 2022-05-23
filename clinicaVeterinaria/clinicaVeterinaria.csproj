@@ -167,6 +167,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TipoAnimalController.cs" />
     <Compile Include="Controllers\TipoUsuarioController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\VeterinarioController.cs" />
     <Compile Include="Dados\AnimalAcoes.cs" />
     <Compile Include="Dados\AtendimentoAcoes.cs" />
@@ -185,14 +186,20 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\TipoAnimalModel.cs" />
     <Compile Include="Models\TipoUsuarioModel.cs" />
+    <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Models\VeterinarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Bd\bd_veterinaria.sql" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\imagens\trilha-animal.png" />
+    <Content Include="Content\imagens\user.png" />
+    <Content Include="Content\imagens\vacina.png" />
+    <Content Include="Content\imagens\veterinario.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -234,6 +241,9 @@
     <Content Include="Views\Animal\CreateAnimal.cshtml" />
     <Content Include="Views\Atendimento\CreateAtendimento.cshtml" />
     <Content Include="Views\Atendimento\GetAtendimentos.cshtml" />
+    <Content Include="Views\Usuario\GetUsuarios.cshtml" />
+    <Content Include="Views\Usuario\CadLogin.cshtml" />
+    <Content Include="Views\Animal\GetAnimais.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -256,6 +266,9 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
@@ -276,6 +289,9 @@
           <CustomServerUrl>
           </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <servers defaultServer="SelfHostServer">
+            <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:65312/" workingDir="" />
+          </servers>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
